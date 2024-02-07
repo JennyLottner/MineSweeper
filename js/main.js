@@ -161,13 +161,15 @@ function expandShown(pos) {
 }
 
 function onCellMarked(event, elCell, pos) {
-    event.preventDefault();
+    event.preventDefault()
     const cell = gBoard[pos.i][pos.j]
 
-    if (!cell.isMarked) {
+    if (!cell.isMarked && !cell.isShown) {
         cell.isMarked = true
         elCell.classList.add('marked')
         elCell.querySelector('button span').innerText = '🚩'
+    } else if (!cell.isMarked) {
+        return
     } else {
         cell.isMarked = false
         elCell.classList.remove('marked')
