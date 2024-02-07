@@ -22,7 +22,7 @@ function onInit() {
     }
     resetAll()
     if (gLevel) buildBoard(gLevel.size, gLevel.mines)
-    
+
 }
 
 function buildBoard(size, mines) {
@@ -30,8 +30,6 @@ function buildBoard(size, mines) {
         size,
         mines
     }
-    var mineIdxs = getMineIdxs()
-
     gBoard = []
     for (var i = 0; i < size; i++) {
         gBoard[i] = []
@@ -41,15 +39,39 @@ function buildBoard(size, mines) {
                 isShown: false,
                 isMine: false,
                 isMarked: false
-
-            }
-            for (var idx = 0; idx < mineIdxs.length; idx++) {
-                const mineIdx = mineIdxs[idx]
-                if (mineIdx.i === i && mineIdx.j === j) {
-                    gBoard[i][j].isMine = true
-                }
             }
         }
+    }
+    renderBoard()
+}
+
+function getMineIdxs(pos) {
+    const mineIdxs = []
+    outer:
+    for (var idx = 0; idx < gLevel.mines; idx++) {
+        const newIdx = { i: getRandomInt(0, gLevel.size), j: getRandomInt(0, gLevel.size) }
+        if (newIdx.i === pos.i && newIdx.j === pos.j) {
+            idx--
+            continue outer
+        }
+        inner:
+        for (var i = 0; i < mineIdxs.length; i++) {
+            if (mineIdxs[i].i === newIdx.i && mineIdxs[i].j === newIdx.j) {
+                idx--
+                continue outer
+            }
+        }
+        mineIdxs.push(newIdx)
+    }
+    return mineIdxs
+}
+
+function addMines(pos) {
+    var mineIdxs = getMineIdxs(pos)
+
+    for (var idx = 0; idx < mineIdxs.length; idx++) {
+        const mineIdx = mineIdxs[idx]
+        gBoard[mineIdx.i][mineIdx.j].isMine = true
     }
     setMinesNeighsCount(mineIdxs)
     renderBoard()
@@ -78,23 +100,6 @@ function renderBoard() {
     elTable.innerHTML = tableStr
 }
 
-function getMineIdxs() {
-    const mineIdxs = []
-    outer:
-    for (var idx = 0; idx < gLevel.mines; idx++) {
-        const newIdx = { i: getRandomInt(0, gLevel.size), j: getRandomInt(0, gLevel.size) }
-        inner:
-        for (var i = 0; i < mineIdxs.length; i++) {
-            if (mineIdxs[i].i === newIdx.i && mineIdxs[i].j === newIdx.j) {
-                idx--
-                continue outer
-            }
-        }
-        mineIdxs.push(newIdx)
-    }
-    return mineIdxs
-}
-
 function setMinesNeighsCount(mineIdxs) {
     for (var idx = 0; idx < mineIdxs.length; idx++) {
         const mineIdx = mineIdxs[idx]
@@ -111,18 +116,15 @@ function setMinesNeighsCount(mineIdxs) {
 }
 
 function onCellClicked(elCell, pos) {
-    const cell = gBoard[pos.i][pos.j]
     //beginning of the game
-    if (gGame.shownCount === 0 && cell.isMine) {
-        buildBoard(gLevel.size, gLevel.mines)
-        onCellClicked(elCell, pos)
-        return
-    }
     if (gGame.shownCount === 0) {
         gGame.isOn = true
+        addMines(pos)
         gStartTime = Date.now()
         startTimer()
+        elCell = document.querySelector(`.cell-${pos.i}-${pos.j}`)
     }
+    const cell = gBoard[pos.i][pos.j]
     //continuation
     if (cell.isShown || cell.isMarked) return
     if (cell.isMine) {
@@ -136,7 +138,6 @@ function onCellClicked(elCell, pos) {
         gGame.shownCount++
         elCell.classList.add('shown')
     } else if (cell.minesAroundCount === 0 && !cell.isMine) expandShown(pos)
-    // renderBoard()
     checkGameOver()
 }
 
