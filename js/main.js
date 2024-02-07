@@ -76,12 +76,15 @@ function renderBoard() {
 
 function getMineIdxs() {
     const mineIdxs = []
+    outer:
     for (var idx = 0; idx < gLevel.mines; idx++) {
         const newIdx = { i: getRandomInt(0, gLevel.size), j: getRandomInt(0, gLevel.size) }
+        inner:
         for (var i = 0; i < mineIdxs.length; i++) {
-            if (mineIdxs[i].i === newIdx.i && mineIdxs[i].j === newIdx.j)
+            if (mineIdxs[i].i === newIdx.i && mineIdxs[i].j === newIdx.j) {
                 idx--
-            continue
+                continue outer
+            }
         }
         mineIdxs.push(newIdx)
     }

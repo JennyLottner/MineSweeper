@@ -65,9 +65,9 @@ footer {
     padding: 0;
 }
 
-.board button span {
+/* .board button span {
     display: none;
-}
+} */
 
 .board button.shown span {
     display: block;
