@@ -16,9 +16,11 @@ function onInit() {
         shownCount: 0,
         markedCount: 0,
         secsPassed: 0,
-        lives: 3
+        lives: 3,
+        hints: 3,
+        safeClick: 3
     }
-    updateLives()
+    resetAll()
     if (gLevel) buildBoard(gLevel.size, gLevel.mines)
     
 }
