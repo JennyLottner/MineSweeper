@@ -167,15 +167,18 @@ function onCellMarked(event, elCell, pos) {
 
     if (!cell.isMarked && !cell.isShown) {
         cell.isMarked = true
+        gGame.markedCount++
         elCell.classList.add('marked')
         elCell.querySelector('button span').innerText = '🚩'
     } else if (!cell.isMarked) {
         return
     } else {
         cell.isMarked = false
+        gGame.markedCount--
         elCell.classList.remove('marked')
         elCell.querySelector('button span').innerText = cell.minesAroundCount
     }
+    document.querySelector('.markCount span').innerText = gGame.markedCount
 }
 
 function checkGameOver() {

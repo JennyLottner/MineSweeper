@@ -30,21 +30,31 @@ footer {
 
 .board {
     border-collapse: collapse;
+    background-color: transparent;
     margin: 0 auto ;
 }
 
 .board td {
     width: 30px;
     height: 30px;
-    border: 1px solid white;
     background-color: rgba(255, 255, 255, 0.5);
     padding: 0;
+    border: 1px solid darkcyan;
+    background-color: transparent;
 }
+
+table td button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
 
 .board button {
     width: 100%;
     height: 100%;
     padding: 0;
+    border: none;
+    background-color: transparent;
 }
 
 .board button span {
@@ -55,12 +65,26 @@ footer {
     display: block;
 }
 
+.board button.shown {
+background-color: rgba(207, 206, 206, 0.4);
+}
+
 .board button.marked span {
     display: block;
 }
 
 .levelBtns {
     margin: 1rem;
+}
+
+.advancement {
+    display: flex;
+    justify-content: center;
+}
+
+.stopwatch,
+.markCount {
+    margin: 0px 20px 0px;
 }
 
 .lives-container {
