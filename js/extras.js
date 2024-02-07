@@ -22,6 +22,11 @@ function updateSmiley(smiley) {
 function revealHint(num) {
     document.querySelector(`.hint${num}`).style.textShadow = '0 0 20px #FC0, 0 0 30px #FC0, 0 0 40px #FC0, 0 0 50px #FC0'
 
+}
+
+function safeClick(elBtn) {
+    elBtn.style.display = 'none'
+
     const emptyCells = []
     for (var i = 0; i < gLevel.size; i++) {
         for (var j = 0; j < gLevel.size; j++) {
@@ -36,11 +41,6 @@ function revealHint(num) {
     setTimeout(() => {
         elCell.style.boxShadow = 'none'
     }, 2000)
-
-}
-
-function safeClick(elBtn) {
-    elBtn.style.display = 'none'
 }
 
 function resetAll() {
