@@ -9,6 +9,8 @@ var gStartTime
 
 function onInit() {
     if (gTimerInterval) clearInterval(gTimerInterval)
+    if (gBoard) var gBoard
+    if (!document.querySelector('.modal').classList.contains('hide')) hideModal()
     gGame = {
         inOn: false,
         shownCount: 0,
@@ -16,10 +18,12 @@ function onInit() {
         secsPassed: 0,
         lives: 3
     }
+    updateLives()
+    if (gLevel) buildBoard(gLevel.size, gLevel.mines)
+    
 }
 
 function buildBoard(size, mines) {
-    onInit()
     gLevel = {
         size,
         mines
@@ -54,19 +58,17 @@ function renderBoard() {
     for (var i = 0; i < gLevel.size; i++) {
         tableStr += `<tr>`
         for (var j = 0; j < gLevel.size; j++) {
-
             const cell = gBoard[i][j]
+
             var className = `cell-${i}-${j}`
             if (cell.isMine) className += ' mine'
             if (cell.isMarked) className += ' marked'
             if (cell.isShown) className += ' shown'
-            if (cell.isMine) {
-                tableStr += `<td><button onclick="onCellClicked(this, {i: ${i}, j: ${j}})" class="${className}">
-            <span>${MINE}</span></button></td>`
-            } else {
-                tableStr += `<td><button onclick="onCellClicked(this, {i: ${i}, j: ${j}})" class="${className}">
-                <span>${cell.minesAroundCount}</span></button></td>`
-            }
+            var item = (cell.isMine) ? MINE : cell.minesAroundCount
+
+            tableStr += `<td><button onclick="onCellClicked(this, {i: ${i}, j: ${j}})" 
+            oncontextmenu="onCellMarked(event, this, {i: ${i}, j: ${j}})" class="${className}">
+            <span>${item}</span></button></td>`
         }
         tableStr += `</tr>`
     }
@@ -88,7 +90,6 @@ function getMineIdxs() {
         }
         mineIdxs.push(newIdx)
     }
-    console.log('mineIdxs:', mineIdxs)
     return mineIdxs
 }
 
@@ -124,15 +125,16 @@ function onCellClicked(elCell, pos) {
     if (cell.isShown || cell.isMarked) return
     if (cell.isMine) {
         gGame.lives--
-        updateLivesDisplay()
-        console.log('gGame.lives:', gGame.lives)
+        updateLives()
+        cell.isShown = true
+        elCell.classList.add('shown')
     }
     if (cell.minesAroundCount > 0) {
         cell.isShown = true
         gGame.shownCount++
         elCell.classList.add('shown')
-    } else if (cell.minesAroundCount === 0) expandShown(pos)
-    renderBoard()
+    } else if (cell.minesAroundCount === 0 && !cell.isMine) expandShown(pos)
+    // renderBoard()
     checkGameOver()
 }
 
@@ -142,35 +144,41 @@ function expandShown(pos) {
         for (var j = pos.j - 1; j <= pos.j + 1; j++) {
             if (j < 0 || j >= gLevel.size) continue
             var cell = gBoard[i][j]
-            cell.isShown = true
-            gGame.shownCount++
 
-            var elCell = document.querySelector(`.cell-${i}-${j}`)
-            elCell.classList.add('shown')
+            if (!cell.isShown) {
+                cell.isShown = true
+                gGame.shownCount++
+
+                var elCell = document.querySelector(`.cell-${i}-${j}`)
+                elCell.classList.add('shown')
+
+                if (cell.minesAroundCount === 0) expandShown({ i, j })
+            }
         }
     }
 }
 
-function onCellMarked(elCell) {
+function onCellMarked(event, elCell, pos) {
+    event.preventDefault();
+    const cell = gBoard[pos.i][pos.j]
+
+    if (!cell.isMarked) {
+        cell.isMarked = true
+        elCell.classList.add('marked')
+        elCell.querySelector('button span').innerText = '🚩'
+    } else {
+        cell.isMarked = false
+        elCell.classList.remove('marked')
+        elCell.querySelector('button span').innerText = cell.minesAroundCount
+    }
 }
 
 function checkGameOver() {
     if (gGame.lives > 0 && (gGame.shownCount !== (gLevel.size ** 2 - gLevel.mines))) return
     const msg = (gGame.lives) ? 'You Win!' : 'Game Over'
+    var smiley = (gGame.lives) ? '😁' : '💀'
+    updateSmiley(smiley)
     clearInterval(gTimerInterval)
     showModal(msg)
     gGame.isOn = false
-}
-////////////////////////////////////////////////////////
-function otherStuff() {
-    document.querySelector('.popup').hidden = true
-    //or
-    const hearts = document.querySelectorAll('.heart');
-    for (var i = 0; i < hearts.length; i++) {
-        if (i < gGame.lives) {
-            hearts[i].style.display = 'block'
-        } else {
-            hearts[i].style.display = 'none'
-        }
-    }
 }

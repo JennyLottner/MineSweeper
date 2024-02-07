@@ -24,31 +24,13 @@ footer {
     bottom:5rem; */
 }
 
-.lives-container {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    border: 5px white;
-    border-radius: 10%;
-}
-
-.heart {
-    width: 30px;
-    height: 30px;
-    background-image: '❤️';
-    background-size: cover;
-    margin-bottom: 5px;
-}
-
 .board-container {
     margin: 0 auto;
 }
 
 .board {
     border-collapse: collapse;
+    margin: 0 auto ;
 }
 
 .board td {
@@ -73,14 +55,46 @@ footer {
     display: block;
 }
 
-.modal {
+.board button.marked span {
+    display: block;
+}
+
+.levelBtns {
+    margin: 1rem;
+}
+
+.lives-container {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.heart {
+    width: 30px;
+    height: 30px;
+    background-image: '❤️';
+    background-size: cover;
+    margin-bottom: 5px;
+}
+
+.smiley {
     background-color: transparent;
-    border: 5px solid white;
-    width: 300px;
+    border: 0px;
+    padding: 0;
+}
+
+.modal {
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100px;
     padding: 20px;
     position: absolute;
-    top: 200px;
-    left: calc(50% - 175px);
+    top: 220px;
+    left: calc(50% - 69px);
+    font-size: x-large;
+    font-weight: bold;
   }
   
   .hide {

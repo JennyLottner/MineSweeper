@@ -1,3 +1,5 @@
+'use strict'
+
 function showModal(msg) {
     const elModal = document.querySelector('.modal')
     elModal.querySelector('span').innerText = msg
@@ -20,16 +22,6 @@ function getRandomInt(min, max) {
 function renderCell(location, value) {
     const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
     elCell.innerHTML = value
-}
-
-function updateScore(diff) {
-    // DONE: update model and dom
-    if (!diff) {
-        gGame.score = 0
-    } else {
-        gGame.score += diff
-    }
-    document.querySelector('span.score').innerText = gGame.score
 }
 
 function startTimer() {
