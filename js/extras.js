@@ -28,11 +28,16 @@ function revealHint(num) {
 }
 
 function hintReveal(pos) {
+    var alreadyShown = []
     for (var i = pos.i - 1; i <= pos.i + 1; i++) {
         if (i < 0 || i >= gLevel.size) continue
         for (var j = pos.j - 1; j <= pos.j + 1; j++) {
             if (j < 0 || j >= gLevel.size) continue
             var currCell = gBoard[i][j]
+            if (currCell.isShown) {
+                alreadyShown.push(currCell)
+                continue
+            }
             var elCell = document.querySelector(`.cell-${i}-${j}`)
             currCell.isShown = true
             elCell.classList.add('shown')
@@ -44,6 +49,7 @@ function hintReveal(pos) {
             for (var j = pos.j - 1; j <= pos.j + 1; j++) {
                 if (j < 0 || j >= gLevel.size) continue
                 var currCell = gBoard[i][j]
+                if (alreadyShown.includes(currCell)) continue
                 var elCell = document.querySelector(`.cell-${i}-${j}`)
                 currCell.isShown = false
                 elCell.classList.remove('shown')
