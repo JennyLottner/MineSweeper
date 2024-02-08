@@ -162,4 +162,5 @@ function resetAll() {
     document.querySelector('.click1').style.display = 'block'
     document.querySelector('.click2').style.display = 'block'
     document.querySelector('.click3').style.display = 'block'
+    gMineCountM = 0
 }
