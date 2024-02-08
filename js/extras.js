@@ -15,7 +15,7 @@ function updateLives() {
 
 function updateSmiley(smiley) {
     document.querySelector('.smiley span').innerText = smiley
-    if (gGame.lives === 0) return
+    if (!gGame.isOn) return
     setTimeout(() => {
         document.querySelector('.smiley span').innerText = '🙂'
     }, 2000)

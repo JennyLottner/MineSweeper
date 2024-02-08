@@ -188,6 +188,7 @@ function onCellMarked(event, elCell, pos) {
 
 function checkGameOver() {
     if (gGame.lives > 0 && (gGame.shownCount !== (gLevel.size ** 2 - gLevel.mines))) return
+    gGame.isOn = false
     clearInterval(gTimerInterval)
     const msg = (gGame.lives) ? 'You Win!' : 'Game Over'
     showModal(msg)
@@ -200,5 +201,4 @@ function checkGameOver() {
                     document.querySelector(`.cell-${currMine.i}-${currMine.j}`).classList.add('shown')
         }
     }
-    gGame.isOn = false
 }
