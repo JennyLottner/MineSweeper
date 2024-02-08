@@ -6,6 +6,7 @@ var gLevel
 var gGame
 var gTimerInterval
 var gStartTime
+var gMineIdxs
 
 function onInit() {
     gGame = {
@@ -64,13 +65,13 @@ function getMineIdxs(pos) {
 }
 
 function addMines(pos) {
-    var mineIdxs = getMineIdxs(pos)
+    gMineIdxs = getMineIdxs(pos)
 
-    for (var idx = 0; idx < mineIdxs.length; idx++) {
-        const mineIdx = mineIdxs[idx]
+    for (var idx = 0; idx < gMineIdxs.length; idx++) {
+        const mineIdx = gMineIdxs[idx]
         gBoard[mineIdx.i][mineIdx.j].isMine = true
     }
-    setMinesNeighsCount(mineIdxs)
+    setMinesNeighsCount(gMineIdxs)
     renderBoard()
 }
 
@@ -187,10 +188,17 @@ function onCellMarked(event, elCell, pos) {
 
 function checkGameOver() {
     if (gGame.lives > 0 && (gGame.shownCount !== (gLevel.size ** 2 - gLevel.mines))) return
+    clearInterval(gTimerInterval)
     const msg = (gGame.lives) ? 'You Win!' : 'Game Over'
+    showModal(msg)
     var smiley = (gGame.lives) ? '😁' : '💀'
     updateSmiley(smiley)
-    clearInterval(gTimerInterval)
-    showModal(msg)
+    if (!gGame.lives) {
+        for (var i = 0; i < gMineIdxs.length; i++) {
+            const currMine = gMineIdxs[i]
+                    gBoard[currMine.i][currMine.j].isShown = true
+                    document.querySelector(`.cell-${currMine.i}-${currMine.j}`).classList.add('shown')
+        }
+    }
     gGame.isOn = false
 }

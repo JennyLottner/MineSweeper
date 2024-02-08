@@ -14,12 +14,12 @@ function updateLives() {
 }
 
 function updateSmiley(smiley) {
-    if (smiley === '😵') {
+    document.querySelector('.smiley span').innerText = smiley
+    if (!gGame.lives) {
         setTimeout(() => {
             document.querySelector('.smiley span').innerText = '🙂'
         }, 2000)
     }
-    document.querySelector('.smiley span').innerText = smiley
 }
 
 function revealHint(num) {
