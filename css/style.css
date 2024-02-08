@@ -15,7 +15,7 @@ body {
 }
 
 .dark-mode body {
-    background-image: url('../img/darkBackground.png');
+    background-image: url('../img/darkBackground.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -104,7 +104,11 @@ table td button {
     height: 100%;
     padding: 0;
     border: none;
-    background-color:  rgba(254, 254, 254, 0.21);
+    background-color:  rgba(254, 254, 254, 0.126);
+}
+
+.dark-mode .board button {
+    color: white;
 }
 
 .board button span {
@@ -116,7 +120,7 @@ table td button {
 }
 
 .board button.shown {
-    background-color: rgba(207, 206, 206, 0.4);
+    background-color: rgba(207, 206, 206, 0.498);
 }
 
 .board button.marked span {
