@@ -116,9 +116,11 @@ function setMinesNeighsCount(mineIdxs) {
 
 function onCellClicked(elCell, pos) {
     //beginning of the game
-    if (gGame.shownCount === 0 && gMineCountM === 0) {
-        gGame.isOn = true
+    if (gGame.shownCount === 0  && gMineCountM === 0) {
         addMines(pos)
+    }
+    if (gGame.shownCount === 0) {
+        gGame.isOn = true
         gStartTime = Date.now()
         startTimer()
         elCell = document.querySelector(`.cell-${pos.i}-${pos.j}`)
