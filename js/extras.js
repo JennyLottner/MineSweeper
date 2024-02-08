@@ -156,6 +156,7 @@ function resetAll() {
     document.querySelector('.markCount span').innerText = gGame.markedCount
     document.querySelector('.stopwatch span').innerText = gGame.secsPassed
     if (gBoard) var gBoard
+    document.querySelector('.smiley span').innerText = '🙂'
 
     document.querySelector('.heart0').style.display = 'block'
     document.querySelector('.heart1').style.display = 'block'
