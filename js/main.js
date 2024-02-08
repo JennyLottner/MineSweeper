@@ -8,21 +8,18 @@ var gTimerInterval
 var gStartTime
 
 function onInit() {
-    if (gTimerInterval) clearInterval(gTimerInterval)
-    if (gBoard) var gBoard
-    if (!document.querySelector('.modal').classList.contains('hide')) hideModal()
     gGame = {
         inOn: false,
         shownCount: 0,
         markedCount: 0,
         secsPassed: 0,
         lives: 3,
+        isHint: false,
         hints: 3,
         safeClick: 3
     }
     resetAll()
     if (gLevel) buildBoard(gLevel.size, gLevel.mines)
-
 }
 
 function buildBoard(size, mines) {
@@ -89,6 +86,7 @@ function renderBoard() {
             if (cell.isMarked) className += ' marked'
             if (cell.isShown) className += ' shown'
             var item = (cell.isMine) ? MINE : cell.minesAroundCount
+            if (item === 0) item = ''
 
             tableStr += `<td><button onclick="onCellClicked(this, {i: ${i}, j: ${j}})" 
             oncontextmenu="onCellMarked(event, this, {i: ${i}, j: ${j}})" class="${className}">
@@ -117,7 +115,7 @@ function setMinesNeighsCount(mineIdxs) {
 
 function onCellClicked(elCell, pos) {
     //beginning of the game
-    if (gGame.shownCount === 0) {
+    if (gGame.shownCount === 0 && gMineCountM === 0) {
         gGame.isOn = true
         addMines(pos)
         gStartTime = Date.now()
@@ -125,6 +123,12 @@ function onCellClicked(elCell, pos) {
         elCell = document.querySelector(`.cell-${pos.i}-${pos.j}`)
     }
     const cell = gBoard[pos.i][pos.j]
+    // extras
+    if (gGame.isHint) {
+        gGame.isHint = false
+        hintReveal(pos)
+        return
+    }
     //continuation
     if (cell.isShown || cell.isMarked) return
     if (cell.isMine) {
@@ -148,7 +152,7 @@ function expandShown(pos) {
             if (j < 0 || j >= gLevel.size) continue
             var cell = gBoard[i][j]
 
-            if (!cell.isShown) {
+            if (!cell.isShown && !cell.isMarked) {
                 cell.isShown = true
                 gGame.shownCount++
 
