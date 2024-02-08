@@ -23,6 +23,7 @@ function updateSmiley(smiley) {
 
 
 function revealHint(num) {
+    if (gGame.shownCount === 0) return
     document.querySelector(`.hint${num}`).style.textShadow = '0 0 20px #FC0, 0 0 30px #FC0, 0 0 40px #FC0, 0 0 50px #FC0'
     gGame.isHint = true
 }
@@ -59,6 +60,7 @@ function hintReveal(pos) {
 }
 
 function safeClick(elBtn) {
+    if (gGame.shownCount === 0) return
     elBtn.style.display = 'none'
 
     const emptyCells = []
