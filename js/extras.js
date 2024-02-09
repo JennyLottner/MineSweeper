@@ -22,8 +22,11 @@ function updateSmiley(smiley) {
 }
 
 function revealHint(num) {
-    if (gGame.shownCount === 0) return
-    document.querySelector(`.hint${num}`).style.textShadow = '0 0 20px #FC0, 0 0 30px #FC0, 0 0 40px #FC0, 0 0 50px #FC0'
+    if (!gGame.isOn) return
+    const currHint = document.querySelector(`.hint${num}`)
+    if (currHint.classList.contains('used')) return
+    currHint.classList.add('used')
+    currHint.style.textShadow = '0 0 20px #FC0, 0 0 30px #FC0, 0 0 40px #FC0, 0 0 50px #FC0'
     gGame.isHint = true
 }
 
@@ -59,7 +62,7 @@ function hintReveal(pos) {
 }
 
 function safeClick(elBtn) {
-    if (gGame.shownCount === 0) return
+    if (!gGame.isOn) return
     elBtn.style.display = 'none'
 
     const emptyCells = []
@@ -163,9 +166,13 @@ function resetAll() {
     document.querySelector('.heart1').style.display = 'block'
     document.querySelector('.heart2').style.display = 'block'
 
-    document.querySelector('.hint1').style.textShadow = 'none'
-    document.querySelector('.hint2').style.textShadow = 'none'
-    document.querySelector('.hint3').style.textShadow = 'none'
+    for (var i = 1; i < 4; i++) {
+        const  currHint = document.querySelector(`.hint${i}`)
+        if (currHint.classList.contains('used')) {
+            currHint.classList.remove('used')
+            currHint.style.textShadow = 'none'
+        }
+    }
 
     document.querySelector('.click1').style.display = 'block'
     document.querySelector('.click2').style.display = 'block'

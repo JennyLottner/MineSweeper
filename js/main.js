@@ -133,7 +133,7 @@ function onCellClicked(elCell, pos) {
         return
     }
     //continuation
-    if (cell.isShown || cell.isMarked) return
+    if (cell.isShown || cell.isMarked || !gGame.isOn) return
     if (cell.isMine) {
         gGame.lives--
         updateLives()
@@ -170,6 +170,7 @@ function expandShown(pos) {
 
 function onCellMarked(event, elCell, pos) {
     event.preventDefault()
+    if (!gGame.isOn) return
     const cell = gBoard[pos.i][pos.j]
 
     if (!cell.isMarked && !cell.isShown) {
@@ -180,10 +181,12 @@ function onCellMarked(event, elCell, pos) {
     } else if (!cell.isMarked) {
         return
     } else {
-        cell.isMarked = false
         gGame.markedCount--
+        cell.isMarked = false
         elCell.classList.remove('marked')
-        elCell.querySelector('button span').innerText = cell.minesAroundCount
+        var replacement = (cell.isMine) ?  MINE : cell.minesAroundCount
+        if (replacement === 0) replacement = ''
+        elCell.querySelector('button span').innerText = replacement
     }
     document.querySelector('.markCount span').innerText = gGame.markedCount
 }
