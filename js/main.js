@@ -1,5 +1,6 @@
 'use strict'
 var MINE = '💣'
+var MARK = '🚩'
 
 var gBoard
 var gLevel
@@ -177,7 +178,7 @@ function onCellMarked(event, elCell, pos) {
         cell.isMarked = true
         gGame.markedCount++
         elCell.classList.add('marked')
-        elCell.querySelector('button span').innerText = '🚩'
+        elCell.querySelector('button span').innerText = MARK
     } else if (!cell.isMarked) {
         return
     } else {

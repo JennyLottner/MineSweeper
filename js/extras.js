@@ -32,16 +32,27 @@ function revealHint(num) {
 
 function hintReveal(pos) {
     var alreadyShown = []
+    var alreadyMarked = []
+
     for (var i = pos.i - 1; i <= pos.i + 1; i++) {
         if (i < 0 || i >= gLevel.size) continue
         for (var j = pos.j - 1; j <= pos.j + 1; j++) {
             if (j < 0 || j >= gLevel.size) continue
             var currCell = gBoard[i][j]
+            var elCell = document.querySelector(`.cell-${i}-${j}`)
+
             if (currCell.isShown) {
                 alreadyShown.push(currCell)
                 continue
             }
-            var elCell = document.querySelector(`.cell-${i}-${j}`)
+            if (currCell.isMarked) {
+                alreadyMarked.push(currCell)
+                currCell.isMarked = false
+                elCell.classList.remove('marked')
+                var text = (currCell.isMine) ? MINE : currCell.minesAroundCount
+                if (text === 0) text = ''
+                elCell.querySelector('button span').innerText = text
+            }
             currCell.isShown = true
             elCell.classList.add('shown')
         }
@@ -51,9 +62,16 @@ function hintReveal(pos) {
             if (i < 0 || i >= gLevel.size) continue
             for (var j = pos.j - 1; j <= pos.j + 1; j++) {
                 if (j < 0 || j >= gLevel.size) continue
+
                 var currCell = gBoard[i][j]
-                if (alreadyShown.includes(currCell)) continue
                 var elCell = document.querySelector(`.cell-${i}-${j}`)
+
+                if (alreadyShown.includes(currCell)) continue
+                if (alreadyMarked.includes(currCell)) {
+                    currCell.isMarked = true
+                    elCell.classList.add('marked')
+                    elCell.querySelector('button span').innerText = MARK
+                }
                 currCell.isShown = false
                 elCell.classList.remove('shown')
             }
@@ -167,7 +185,7 @@ function resetAll() {
     document.querySelector('.heart2').style.display = 'block'
 
     for (var i = 1; i < 4; i++) {
-        const  currHint = document.querySelector(`.hint${i}`)
+        const currHint = document.querySelector(`.hint${i}`)
         if (currHint.classList.contains('used')) {
             currHint.classList.remove('used')
             currHint.style.textShadow = 'none'
