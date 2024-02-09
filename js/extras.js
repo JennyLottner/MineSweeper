@@ -81,7 +81,6 @@ function hintReveal(pos) {
 
 function safeClick(elBtn) {
     if (!gGame.isOn) return
-    elBtn.style.display = 'none'
 
     const emptyCells = []
     for (var i = 0; i < gLevel.size; i++) {
@@ -90,6 +89,8 @@ function safeClick(elBtn) {
             if (!cell.isMine && !cell.isShown && !cell.isMarked) emptyCells.push({ i, j })
         }
     }
+    if (emptyCells.length === 0) return
+    elBtn.style.display = 'none'
     const chosenCell = emptyCells[getRandomInt(0, emptyCells.length)]
     const elCell = document.querySelector(`.cell-${chosenCell.i}-${chosenCell.j}`)
     elCell.style.transition = 'box-shadow 0.5s ease'
