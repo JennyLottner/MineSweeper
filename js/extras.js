@@ -1,5 +1,4 @@
 'use strict'
-var gMineCountM = 0
 var gMineIdxsM
 
 function updateLives() {
@@ -102,10 +101,11 @@ function safeClick(elBtn) {
 
 function manualPositioning() {
     document.querySelector('.levelBtns .manual').classList.add('active')
-    gMineCountM = 0
-    gMineIdxsM = []
     if (typeof gLevel !== 'undefined') buildBoardManual(gLevel.size, gLevel.mines)
     else buildBoardManual(8, 14)
+    gGame.mineCount = gLevel.mines
+    document.querySelector('.markCount span').innerText = gGame.mineCount
+    gMineIdxsM = []
 }
 
 function buildBoardManual(size, mines) {
@@ -144,14 +144,25 @@ function renderBoardManual() {
 }
 
 function placeMine(elCell, pos) {
-    if (gBoard[pos.i][pos.j].isMine) return
-    gMineIdxsM.push(pos)
-    gBoard[pos.i][pos.j].isMine = true
-    elCell.classList.add('mine')
-    gMineCountM++
-    renderCell(pos, MINE)
-    
-    if (gMineCountM >= gLevel.mines) {
+    if (gBoard[pos.i][pos.j].isMine) {
+        const idx = gMineIdxsM.findIndex(position => (position.i === pos.i) && (position.j === pos.j))
+        gMineIdxsM.splice(idx, 1)
+        gBoard[pos.i][pos.j].isMine = false
+        elCell.classList.remove('mine')
+        gGame.mineCount++
+        document.querySelector('.markCount span').innerText = gGame.mineCount
+        renderCell(pos, null)
+    } else {
+        gMineIdxsM.push(pos)
+        gBoard[pos.i][pos.j].isMine = true
+        elCell.classList.add('mine')
+        gGame.mineCount--
+        document.querySelector('.markCount span').innerText = gGame.mineCount
+        renderCell(pos, MINE)
+
+    }
+
+    if (gGame.mineCount <= 0) {
         for (var i = 0; i < gLevel.size; i++) {
             for (var j = 0; j < gLevel.size; j++) {
                 gBoard[i][j].isShown = false
@@ -160,6 +171,9 @@ function placeMine(elCell, pos) {
         document.querySelector('.levelBtns .manual').classList.remove('active')
         setMinesNeighsCount(gMineIdxsM)
         renderBoard()
+
+        gGame.mineCount = gLevel.mines
+        document.querySelector('.markCount span').innerText = gGame.mineCount
     }
 }
 
@@ -189,7 +203,6 @@ function resetAll() {
     document.querySelector('.click1').style.display = 'block'
     document.querySelector('.click2').style.display = 'block'
     document.querySelector('.click3').style.display = 'block'
-    gMineCountM = 0
 }
 
 // function showInstructions() {

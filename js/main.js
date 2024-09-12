@@ -117,7 +117,7 @@ function setMinesNeighsCount(mineIdxs) {
 
 function onCellClicked(elCell, pos) {
     //beginning of the game
-    if (gGame.shownCount === 0 && gMineCountM === 0) {
+    if (gGame.shownCount === 0 && !gMineIdxsM[0]) {
         addMines(pos)
     }
     if (gGame.shownCount === 0) {
