@@ -14,7 +14,7 @@ function showModal(type, msg) {
 function hideModal() {
     const elModal = document.querySelector('.modal')
     if (elModal.classList.contains('status-modal')) elModal.classList.remove('status-modal')
-    elModal.classList.add('hide')
+    if (!elModal.classList.contains('hide')) elModal.classList.add('hide')
 }
 
 function darkMode() {

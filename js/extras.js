@@ -231,5 +231,6 @@ function showInstructions() {
         <p>The user first positions the mines (by clicking cells) and then plays on the board he built.</p>
     </div>
         `
+    hideModal()
     showModal(null, msg)
 }
