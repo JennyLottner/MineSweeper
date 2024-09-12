@@ -117,7 +117,7 @@ function setMinesNeighsCount(mineIdxs) {
 
 function onCellClicked(elCell, pos) {
     //beginning of the game
-    if (gGame.shownCount === 0  && gMineCountM === 0) {
+    if (gGame.shownCount === 0 && gMineCountM === 0) {
         addMines(pos)
     }
     if (gGame.shownCount === 0) {
@@ -185,7 +185,7 @@ function onCellMarked(event, elCell, pos) {
         gGame.markedCount--
         cell.isMarked = false
         elCell.classList.remove('marked')
-        var replacement = (cell.isMine) ?  MINE : cell.minesAroundCount
+        var replacement = (cell.isMine) ? MINE : cell.minesAroundCount
         if (replacement === 0) replacement = ''
         elCell.querySelector('button span').innerText = replacement
     }
@@ -197,14 +197,14 @@ function checkGameOver() {
     gGame.isOn = false
     clearInterval(gTimerInterval)
     const msg = (gGame.lives) ? 'You Win!' : 'Game Over'
-    showModal(msg)
+    showModal('status', msg)
     var smiley = (gGame.lives) ? '😁' : '💀'
     updateSmiley(smiley)
     if (!gGame.lives) {
         for (var i = 0; i < gMineIdxs.length; i++) {
             const currMine = gMineIdxs[i]
-                    gBoard[currMine.i][currMine.j].isShown = true
-                    document.querySelector(`.cell-${currMine.i}-${currMine.j}`).classList.add('shown')
+            gBoard[currMine.i][currMine.j].isShown = true
+            document.querySelector(`.cell-${currMine.i}-${currMine.j}`).classList.add('shown')
         }
     }
 }

@@ -1,13 +1,15 @@
 'use strict'
 
-function showModal(msg) {
+function showModal(type, msg) {
     const elModal = document.querySelector('.modal')
+    if (type === 'status') elModal.classList.add('status-modal')
     elModal.querySelector('span').innerText = msg
     elModal.classList.remove('hide')
 }
 
 function hideModal() {
     const elModal = document.querySelector('.modal')
+    if (elModal.classList.contains('status-modal')) elModal.classList.remove('status-modal')
     elModal.classList.add('hide')
 }
 
