@@ -177,6 +177,13 @@ footer {
         font-size: x-large;
         font-weight: bold;
     }
+
+    button {
+        position: absolute;
+        inset: 0 0 auto auto;
+        border: none;
+        background-color: transparent;
+    }
 }
 
 .dark-mode {
