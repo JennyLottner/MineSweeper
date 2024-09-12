@@ -208,29 +208,30 @@ function resetAll() {
 
 function showInstructions() {
     const msg = `
-    <h1>Instructions</h1>
-    <div>
-        <p>Minesweeper is a game where mines are hidden in a grid of squares. Safe squares have numbers telling you how many mines touch the square. You can use the number clues to solve the game by opening all of the safe squares. If you click on 3 mines you lose the game!</p>
-        <p>You open squares with the left mouse button and put flags on mines with the right mouse button.</p>
-        <p>A counter shows the number of mines without flags, and a clock shows your time in seconds.</p>
-        <p>The game ends when all safe squares have been opened.</p>
-    </div>
+        <h1>Instructions</h1>
+        <div>
+            <p>Minesweeper is a game where mines are hidden in a grid of squares. Safe squares have numbers telling you how many mines touch the square. You can use the number clues to solve the game by opening all of the safe squares. If you click on 3 mines you lose the game!</p>
+            <p>You open squares with the left mouse button and put flags on mines with the right mouse button.</p>
+            <p>A counter shows the number of mines without flags, and a clock shows your time in seconds.</p>
+            <p>The game ends when all safe squares have been opened.</p>
+        </div>
 
-    <div>
-        <h2>Hints</h2>
-        <p>When a hint is activated, the cell clicked next and its neighbors are revealed for a second before disappearing.</p>
-    </div>
+        <div>
+            <h2>Hints</h2>
+            <p>When a hint is activated, the cell clicked next and its neighbors are revealed for a second before disappearing.</p>
+        </div>
 
-    <div>
-        <h2>Safe Clicks</h2>
-        <p>When clicking a Safe-Click button, a random hidden cell that is safe to click will glow momentarily.</p>
-    </div>
+        <div>
+            <h2>Safe Clicks</h2>
+            <p>When clicking a Safe-Click button, a random hidden cell that is safe to click will glow momentarily.</p>
+        </div>
 
-    <div>
-        <h2>Manual positioning</h2>
-        <p>The user first positions the mines (by clicking cells) and then plays on the board he built.</p>
-    </div>
-        `
+        <div>
+            <h2>Manual positioning</h2>
+            <p>The user first positions the mines (by clicking cells) and then plays on the board he built.</p>
+        </div>
+    `
+
     hideModal()
     showModal(null, msg)
 }
