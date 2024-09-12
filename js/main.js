@@ -11,6 +11,7 @@ var gMineIdxs
 
 function onInit(size = null, mines = null) {
     if (size && mines) gLevel = {size, mines}
+    gMineIdxs = undefined
 
     gGame = {
         inOn: false,
@@ -76,7 +77,7 @@ function addMines(pos) {
     renderBoard()
 }
 
-function renderBoard() {
+function renderBoard() {  
     var tableStr = ''
     for (var i = 0; i < gLevel.size; i++) {
         tableStr += `<tr>`
@@ -117,7 +118,7 @@ function setMinesNeighsCount(mineIdxs) {
 
 function onCellClicked(elCell, pos) {
     //beginning of the game
-    if (gGame.shownCount === 0 && !gMineIdxsM) {
+    if (gGame.shownCount === 0 && !gMineIdxs) {
         addMines(pos)
     }
     if (gGame.shownCount === 0) {

@@ -170,7 +170,7 @@ function placeMine(elCell, pos) {
         }
         document.querySelector('.levelBtns .manual').classList.remove('active')
         gMineIdxs = gMineIdxsM
-        setMinesNeighsCount(gMineIdxsM)
+        setMinesNeighsCount(gMineIdxs)
         renderBoard()
 
         gGame.mineCount = gLevel.mines
