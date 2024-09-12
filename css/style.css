@@ -9,14 +9,6 @@ body {
     transition: background-image 0.5s ease;
 }
 
-.dark-mode body {
-    background-image: url('../img/darkBackground.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: rgb(237, 236, 236);
-}
-
 header {
     gap: 0.5rem;
     padding-block: 1.25rem;
@@ -62,18 +54,6 @@ header {
     }
 }
 
-.dark-mode .levelBtns button {
-    background-color: rgb(86, 86, 86);
-    color: white;
-}
-
-footer {
-    font-size: 12px;
-    width: 100%;
-    position: fixed;
-    bottom: 1rem;
-}
-
 main {
     grid-template-columns: 4rem 1fr 4rem;
     grid-template-rows: repeat(2, 1fr);
@@ -93,6 +73,22 @@ main {
     .safeClicks-container {
         grid-area: 2 / 3 / 3 / 4;
     }
+
+    section {
+        text-align: center;
+        gap: 0.25rem;
+
+        div {
+            cursor: pointer;
+        }
+    }
+}
+
+footer {
+    font-size: 12px;
+    width: 100%;
+    position: fixed;
+    bottom: 1rem;
 }
 
 .board-container {
@@ -141,41 +137,6 @@ main {
     }
 }
 
-.dark-mode .board button {
-    color: white;
-}
-
-.lives-container {
-    /* position: absolute; */
-    top: 50%;
-    left: 10px;
-    /* transform: translateY(-50%); */
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.hints-container {
-    /* position: absolute; */
-    top: 40%;
-    right: 10px;
-    /* transform: translateY(-50%); */
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.safeClicks-container {
-    /* position: absolute; */
-    top: 65%;
-    right: 10px;
-    /* transform: translateY(-50%); */
-    display: flex;
-    flex-direction: column;
-    max-width: 80px;
-    cursor: pointer;
-}
-
 .darkMode-switch {
     width: 40px;
     height: 20px;
@@ -203,10 +164,6 @@ main {
     transition: 1s ease;
 }
 
-.dark-mode .slider {
-    left: 23px;
-}
-
 .modal {
     font-size: x-large;
     font-weight: bold;
@@ -219,10 +176,29 @@ main {
     transform: translateY(-50%) translateX(-50%);
 }
 
-.dark-mode .modal {
-    background-color: rgba(0, 0, 0, 0.8);
-}
+.dark-mode {
+    body {
+        background-image: url('../img/darkBackground.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: rgb(237, 236, 236);
+    }
 
-.hide {
-    display: none;
+    .slider {
+        left: 23px;
+    }
+
+    .levelBtns button {
+        background-color: rgb(86, 86, 86);
+        color: white;
+    }
+
+    .board button {
+        color: white;
+    }
+
+    .modal {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
 }
