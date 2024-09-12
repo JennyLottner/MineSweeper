@@ -2,8 +2,12 @@
 
 function showModal(type, msg) {
     const elModal = document.querySelector('.modal')
-    if (type === 'status') elModal.classList.add('status-modal')
-    elModal.querySelector('span').innerText = msg
+    if (type === 'status') {
+        elModal.classList.add('status-modal')
+        elModal.querySelector('span').innerText = msg
+    } else {
+        elModal.querySelector('span').innerHTML = msg
+    }
     elModal.classList.remove('hide')
 }
 
@@ -11,6 +15,13 @@ function hideModal() {
     const elModal = document.querySelector('.modal')
     if (elModal.classList.contains('status-modal')) elModal.classList.remove('status-modal')
     elModal.classList.add('hide')
+}
+
+function darkMode() {
+    var darkModeInput = document.getElementById('darkModeInput');
+    darkModeInput.value = (darkModeInput.value === 'true') ? 'false' : 'true'
+
+    document.documentElement.classList.toggle('dark-mode', darkModeInput.value === 'true')
 }
 
 function getRandomInt(min, max) {

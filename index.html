@@ -19,16 +19,16 @@
             </div>
 
             <div class="markCount flex align-center">
-                <h3>Marked:</h3>&nbsp;
-                <span>0</span>
+                <h3>Mines:</h3>&nbsp;
+                <span>-</span>
             </div>
         </div>
 
         <div class="levelBtns flex align-center">
             <h3>Level:</h3>
-            <button onclick="onInit(); buildBoard(4, 2)">Beginner</button>
-            <button onclick="onInit(); buildBoard(8, 14)">Medium</button>
-            <button onclick="onInit(); buildBoard(12, 32)">Expert</button>
+            <button onclick="onInit(4, 2)">Beginner</button>
+            <button onclick="onInit(8, 14)">Medium</button>
+            <button onclick="onInit(12, 32)">Expert</button>
             <button onclick="onInit(); manualPositioning()" class="manual">Manual</button>
         </div>
 

@@ -9,26 +9,26 @@ var gTimerInterval
 var gStartTime
 var gMineIdxs
 
-function onInit() {
+function onInit(size = null, mines = null) {
+    if (size && mines) gLevel = {size, mines}
+
     gGame = {
         inOn: false,
         shownCount: 0,
-        markedCount: 0,
+        mineCount: mines ? mines : 0,
         secsPassed: 0,
         lives: 3,
         isHint: false,
         hints: 3,
         safeClick: 3
     }
+
     resetAll()
-    if (gLevel) buildBoard(gLevel.size, gLevel.mines)
+
+    if (gLevel) buildBoard(gLevel.size)
 }
 
-function buildBoard(size, mines) {
-    gLevel = {
-        size,
-        mines
-    }
+function buildBoard(size) {
     gBoard = []
     for (var i = 0; i < size; i++) {
         gBoard[i] = []
@@ -137,9 +137,11 @@ function onCellClicked(elCell, pos) {
     if (cell.isShown || cell.isMarked || !gGame.isOn) return
     if (cell.isMine) {
         gGame.lives--
+        gGame.mineCount--
         updateLives()
         cell.isShown = true
         elCell.classList.add('shown')
+        document.querySelector('.markCount span').innerText = gGame.mineCount
     }
     if (cell.minesAroundCount > 0) {
         cell.isShown = true
@@ -176,20 +178,20 @@ function onCellMarked(event, elCell, pos) {
 
     if (!cell.isMarked && !cell.isShown) {
         cell.isMarked = true
-        gGame.markedCount++
+        gGame.mineCount--
         elCell.classList.add('marked')
         elCell.querySelector('button span').innerText = MARK
     } else if (!cell.isMarked) {
         return
     } else {
-        gGame.markedCount--
+        gGame.mineCount++
         cell.isMarked = false
         elCell.classList.remove('marked')
         var replacement = (cell.isMine) ? MINE : cell.minesAroundCount
         if (replacement === 0) replacement = ''
         elCell.querySelector('button span').innerText = replacement
     }
-    document.querySelector('.markCount span').innerText = gGame.markedCount
+    document.querySelector('.markCount span').innerText = gGame.mineCount
 }
 
 function checkGameOver() {

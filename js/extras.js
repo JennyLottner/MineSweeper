@@ -100,13 +100,6 @@ function safeClick(elBtn) {
     }, 2000)
 }
 
-function darkMode() {
-    var darkModeInput = document.getElementById('darkModeInput');
-    darkModeInput.value = (darkModeInput.value === 'true') ? 'false' : 'true'
-
-    document.documentElement.classList.toggle('dark-mode', darkModeInput.value === 'true')
-}
-
 function manualPositioning() {
     document.querySelector('.levelBtns .manual').classList.add('active')
     gMineCountM = 0
@@ -157,7 +150,7 @@ function placeMine(elCell, pos) {
     elCell.classList.add('mine')
     gMineCountM++
     renderCell(pos, MINE)
-
+    
     if (gMineCountM >= gLevel.mines) {
         for (var i = 0; i < gLevel.size; i++) {
             for (var j = 0; j < gLevel.size; j++) {
@@ -176,7 +169,7 @@ function resetAll() {
     if (document.querySelector('.levelBtns .manual').classList.contains('active')) {
         document.querySelector('.levelBtns .manual').classList.remove('active')
     }
-    document.querySelector('.markCount span').innerText = gGame.markedCount
+    document.querySelector('.markCount span').innerText = gGame.mineCount
     document.querySelector('.stopwatch span').innerText = gGame.secsPassed
     if (gBoard) var gBoard
     document.querySelector('.smiley span').innerText = '🙂'
@@ -198,3 +191,14 @@ function resetAll() {
     document.querySelector('.click3').style.display = 'block'
     gMineCountM = 0
 }
+
+// function showInstructions() {
+//     const msg = <>
+//     <h1>Instructions</h1>
+//     <p>Minesweeper is a game where mines are hidden in a grid of squares. Safe squares have numbers telling you how many mines touch the square. You can use the number clues to solve the game by opening all of the safe squares. If you click on 3 mines you lose the game!</p>
+//     <p>You open squares with the left mouse button and put flags on mines with the right mouse button.</p>
+//     <p>A counter shows the number of mines without flags, and a clock shows your time in seconds.</p>
+//     <p>The game ends when all safe squares have been opened.</p>
+//     </>
+//     showModal(null, msg)
+// }
