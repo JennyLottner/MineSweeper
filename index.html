@@ -9,48 +9,53 @@
 </head>
 
 <body onload="onInit()">
-    <h1>Mine<button class="smiley" onclick="onInit()"><span>🙂</span></button>Sweeper</h1>
-    <h3>
-        <div class="time">
-            <div class="stopwatch">Time:
-                <span>000</span>
+    <header class="flex column align-center">
+        <h1 class="title">Mine<button class="smiley" onclick="onInit()"><span>🙂</span></button>Sweeper</h1>
+
+        <div class="time flex">
+            <div class="stopwatch flex align-center">
+                <h3>Time:</h3>&nbsp;
+                <span>0</span>
             </div>
 
-            <div class="markCount">Marked:
+            <div class="markCount flex align-center">
+                <h3>Marked:</h3>&nbsp;
                 <span>0</span>
             </div>
         </div>
 
-        <div class="levelBtns">Level:
+        <div class="levelBtns flex align-center">
+            <h3>Level:</h3>
             <button onclick="onInit(); buildBoard(4, 2)">Beginner</button>
             <button onclick="onInit(); buildBoard(8, 14)">Medium</button>
             <button onclick="onInit(); buildBoard(12, 32)">Expert</button>
             <button onclick="onInit(); manualPositioning()" class="manual">Manual</button>
         </div>
+    </header>
 
-        <div class="lives-container">Lives
-            <div class="heart0"><span>❤️</span></div>
-            <div class="heart1"><span>❤️</span></div>
-            <div class="heart2"><span>❤️</span></div>
-        </div>
+    <div onclick="darkMode()" class="darkMode-switch">
+        <input type="hidden" id="darkModeInput">
+        <span class="slider"></span>
+    </div>
 
-        <div onclick="darkMode()" class="darkMode-switch">
-            <input type="hidden" id="darkModeInput">
-            <span class="slider"></span>
-        </div>
+    <div class="lives-container">Lives
+        <div class="heart0"><span>❤️</span></div>
+        <div class="heart1"><span>❤️</span></div>
+        <div class="heart2"><span>❤️</span></div>
+    </div>
 
-        <div class="hints-container">Hints
-            <div onclick="revealHint(1)" class="hint1"><span>💡</span></div>
-            <div onclick="revealHint(2)" class="hint2"><span>💡</span></div>
-            <div onclick="revealHint(3)" class="hint3"><span>💡</span></div>
-        </div>
 
-        <div class="safeClicks-container">Safe Clicks
-            <div onclick="safeClick(this)" class="click1"><span>🖱️</span></div>
-            <div onclick="safeClick(this)" class="click2"><span>🖱️</span></div>
-            <div onclick="safeClick(this)" class="click3"><span>🖱️</span></div>
-        </div>
-    </h3>
+    <div class="hints-container">Hints
+        <div onclick="revealHint(1)" class="hint1"><span>💡</span></div>
+        <div onclick="revealHint(2)" class="hint2"><span>💡</span></div>
+        <div onclick="revealHint(3)" class="hint3"><span>💡</span></div>
+    </div>
+
+    <div class="safeClicks-container">Safe Clicks
+        <div onclick="safeClick(this)" class="click1"><span>🖱️</span></div>
+        <div onclick="safeClick(this)" class="click2"><span>🖱️</span></div>
+        <div onclick="safeClick(this)" class="click3"><span>🖱️</span></div>
+    </div>
 
     <table class="board-container">
         <tbody class="board"></tbody>
@@ -58,7 +63,9 @@
 
     <div class="modal hide"><span></span></div>
 
-    <footer>© Jenny Lottner</footer>
+    <footer class="flex justify-center">
+        <p>© Jenny Lottner</p>
+    </footer>
 
     <script src="js/utils.js"></script>
     <script src="js/extras.js"></script>
