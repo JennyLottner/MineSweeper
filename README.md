@@ -54,4 +54,4 @@ For questions or feedback, please reach out to:
 
 **Jenny Lottner - Tover**
 [GitHub](https://github.com/JennyLottner)
-[LinkedIn](www.linkedin.com/in/jenny-lottner-tover-7b1357261)
+[LinkedIn](https://www.linkedin.com/in/jenny-lottner-tover-7b1357261)
