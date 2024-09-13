@@ -26,12 +26,10 @@ Minesweeper is a logic puzzle game. The game consists of a grid of clickable til
 - CSS3
 - Vanilla JavaScript
 
-* This project was my first major solo vanilla JavaScript application. Through building it, I learned how to:
+This project was my first major solo vanilla JavaScript application. Through building it, I learned how to:
 - Set up and run a website locally.
 - Create a responsive layout using CSS Grid and Flex.
 - Use GitHub for version control, including committing changes, branching, and pushing updates.
-
-Working without frameworks or libraries helped me deepen my understanding of JavaScript and browser functionality.
 
 ## Installation
 You can view the project live [here](https://jennylottner.github.io/MineSweeper/)
