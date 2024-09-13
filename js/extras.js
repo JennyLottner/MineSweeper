@@ -75,7 +75,7 @@ function hintReveal(pos) {
                 elCell.classList.remove('shown')
             }
         }
-    }, 1000)
+    }, 1500)
 }
 
 function safeClick(elBtn) {
@@ -228,7 +228,7 @@ function showInstructions() {
 
         <div>
             <h2>Manual positioning</h2>
-            <p>The user first positions the mines (by clicking cells) and then plays on the board he built.</p>
+            <p>The user positions the mines (by clicking cells) before playing.</p>
         </div>
     `
 
