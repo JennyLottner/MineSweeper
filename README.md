@@ -10,16 +10,15 @@ Minesweeper is a logic puzzle game. The game consists of a grid of clickable til
 - [Contact](#contact)
 
 ## Features
-- **Dark Mode**.
-- **Support 3 levels of the game**.
-- **Support for 3 lives**.
-- **Supports full expand**: When an empty cell is clicked, all adjacent cell open.
-- **Supports 3 safe clicks**: When a safe click is used, a random concealed cell that is safe to click will be revealed for 3 seconds.
-- **Supports 3 hints**: When a safe click is used, a random concealed cell that is safe to click will be revealed for 3 seconds.
-- **Supports manually positioned mines mode**: When manual mode is used the user positions the mines on the board before playing.
-- **Other**:
-- The first clicked cell is never a mine.
-- Reactive smiley face reset button.
+- **Dark Mode**: Toggle between light and dark themes.
+- **Three Difficulty Levels**: Choose from 3 levels of the game.
+- **Three Lives**: Play with up to 3 lives.
+- **First Safe Click**: The first cell clicked is guaranteed to be safe.
+- **Auto-Expand on Empty Cell**: Clicking an empty cell automatically reveals all adjacent empty cells.
+- **Three Safe Clicks**: Use up to 3 safe clicks to reveal a random non-mined cell for 3 seconds.
+- **Three Hints**: Use up to 3 hints to reveal safe cells for 3 seconds.
+- **Manual Mine Placement Mode**: Place mines manually before starting the game.
+- **Interactive Smiley Face Reset Button**: Click the smiley to reset the game with a new board.
 
 ## Technologies used
 - HTML5
