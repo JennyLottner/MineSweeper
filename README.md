@@ -15,8 +15,8 @@ Minesweeper is a logic puzzle game. The game consists of a grid of clickable til
 - **Three Lives**: Play with up to 3 lives.
 - **First Safe Click**: The first cell clicked is guaranteed to be safe.
 - **Auto-Expand on Empty Cell**: Clicking an empty cell automatically reveals all adjacent empty cells.
-- **Three Safe Clicks**: Use up to 3 safe clicks to reveal a random non-mined cell for 3 seconds.
-- **Three Hints**: Use up to 3 hints to reveal safe cells for 3 seconds.
+- **Three Safe Clicks**: Use up to 3 safe clicks to reveal a random non-mined cell momentarily.
+- **Three Hints**: Use up to 3 hints to reveal safe cells momentarily.
 - **Manual Mine Placement Mode**: Place mines manually before starting the game.
 - **Interactive Smiley Face Reset Button**: Click the smiley to reset the game with a new board.
 
